@@ -1,7 +1,9 @@
-from .layer import Layer
+from abc import abstractmethod
+import numpy as np
+from .layer import NonTrainableLayer
 
 
-class Activation(Layer):
+class Activation(NonTrainableLayer):
     def __init__(self):
         super().__init__()
         self._is_trainable = False
@@ -15,11 +17,13 @@ class Activation(Layer):
         pass
 
     def forward(self, input_data, is_training=False) -> np.ndarray:
+        self.__validate_input(input_data)
         if is_training:
             self.input = input_data
         return self.fn(input_data)
-    
+
     def backward(self, output_gradient, learning_rate) -> np.ndarray:
+        self.__validate_numpy(output_gradient)
         return output_gradient * self.fn_derivative(self.input)
 
     def get_trainable_params(self) -> int:

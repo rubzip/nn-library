@@ -2,10 +2,10 @@ from ..base import Activation
 import numpy as np
 
 
-class Sigmoid(Activation):
+class Tanh(Activation):
     def fn(self, x: np.ndarray) -> np.ndarray:
-        return 1 / (1 + np.exp(-x))
+        return np.tanh(x)
 
     def fn_derivative(self, x: np.ndarray) -> np.ndarray:
-        s = self.fn(x)
-        return s * (1 - s)
+        t = self.fn(x)
+        return 1 - t**2

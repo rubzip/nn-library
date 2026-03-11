@@ -2,10 +2,9 @@ from ..base import Activation
 import numpy as np
 
 
-class Sigmoid(Activation):
+class Relu6(Activation):
     def fn(self, x: np.ndarray) -> np.ndarray:
-        return 1 / (1 + np.exp(-x))
+        return np.minimum(np.maximum(0, x), 6)
 
     def fn_derivative(self, x: np.ndarray) -> np.ndarray:
-        s = self.fn(x)
-        return s * (1 - s)
+        return ((x > 0) & (x < 6)).astype(float)
