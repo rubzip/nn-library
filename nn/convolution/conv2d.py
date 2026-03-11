@@ -21,3 +21,18 @@ class Conv2D(Layer):
         self._is_trainable = True
         self._expected_input_dim = 4  # (batch_size, in_channels, height, width)
         self._expected_input_shape = (None, in_channels, None, None)
+
+    def forward(self, input_data: np.ndarray, is_training: bool = False) -> np.ndarray:
+        self._validate_input(input_data)
+        # TODO: Implement actual convolution logic
+        return input_data
+
+    def backward(
+        self, output_gradient: np.ndarray, learning_rate: float
+    ) -> np.ndarray:
+        # TODO: Implement actual backward logic
+        return output_gradient
+
+    def get_trainable_params(self) -> int:
+        # TODO: Implement parameter counting
+        return 0

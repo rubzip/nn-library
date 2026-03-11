@@ -17,13 +17,13 @@ class Activation(NonTrainableLayer):
         pass
 
     def forward(self, input_data, is_training=False) -> np.ndarray:
-        self.__validate_input(input_data)
+        self._validate_input(input_data)
         if is_training:
             self.input = input_data
         return self.fn(input_data)
 
     def backward(self, output_gradient, learning_rate) -> np.ndarray:
-        self.__validate_numpy(output_gradient)
+        self._validate_numpy(output_gradient)
         return output_gradient * self.fn_derivative(self.input)
 
     def get_trainable_params(self) -> int:

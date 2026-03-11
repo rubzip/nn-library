@@ -38,7 +38,7 @@ class Layer(ABC):
     def __call__(self, input_data: np.ndarray, is_training: bool = False) -> np.ndarray:
         return self.forward(input_data, is_training)
 
-    def __validate_shape(self, input_data: np.ndarray):
+    def _validate_shape(self, input_data: np.ndarray):
         if self._expected_input_shape is None:
             return
 
@@ -49,7 +49,7 @@ class Layer(ABC):
                     f"Expected input shape {self._expected_input_shape}, got {shape}"
                 )
 
-    def __validate_dim(self, input_data: np.ndarray):
+    def _validate_dim(self, input_data: np.ndarray):
         if self._expected_input_dim is None:
             return
 
@@ -59,16 +59,16 @@ class Layer(ABC):
                 f"Expected input dimension {self._expected_input_dim}, got {dim}"
             )
 
-    def __validate_numpy(self, input_data: np.ndarray):
+    def _validate_numpy(self, input_data: np.ndarray):
         if not isinstance(input_data, np.ndarray):
             raise ValueError(
                 f"Expected input to be a numpy array, got {type(input_data)}"
             )
 
-    def __validate_input(self, input_data: np.ndarray):
-        self.__validate_numpy(input_data)
-        self.__validate_dim(input_data)
-        self.__validate_shape(input_data)
+    def _validate_input(self, input_data: np.ndarray):
+        self._validate_numpy(input_data)
+        self._validate_dim(input_data)
+        self._validate_shape(input_data)
 
 
 class TrainableLayer(Layer):

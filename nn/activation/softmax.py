@@ -13,4 +13,5 @@ class Softmax(Activation):
         return exp_x / np.sum(exp_x, axis=-1, keepdims=True)
 
     def fn_derivative(self, x: np.ndarray) -> np.ndarray:
-        pass
+        s = self.fn(x)
+        return s * (1 - s)

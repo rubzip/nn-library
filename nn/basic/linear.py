@@ -21,7 +21,7 @@ class Linear(TrainableLayer):
             self.biases: np.ndarray = np.zeros((1, output_size))
 
     def forward(self, input_data: np.ndarray, is_training: bool = False) -> np.ndarray:
-        self.__validate_input(input_data)
+        self._validate_input(input_data)
         if is_training:
             self.input = input_data
 
