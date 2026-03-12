@@ -93,3 +93,7 @@ class NonTrainableLayer(Layer):
     
     def unfreeze(self):
         self._is_trainable = False
+
+    def get_trainable_params(self):
+        return 0
+
