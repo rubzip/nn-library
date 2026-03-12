@@ -7,9 +7,6 @@ class BaseScaler(NonTrainableLayer):
     @abstractmethod
     def fit(self, X): ...
 
-    def get_trainable_params(self) -> int:
-        return 0
-
 class StandardScaler(BaseScaler):
     def __init__(self):
         super().__init__()
@@ -39,4 +36,5 @@ class MinMaxScaler(BaseScaler):
     
     def backward(self, X):
         return X * (self.max - self.min) + self.min
+
 
