@@ -25,6 +25,3 @@ class Activation(NonTrainableLayer):
     def backward(self, output_gradient, learning_rate) -> np.ndarray:
         self._validate_numpy(output_gradient)
         return output_gradient * self.fn_derivative(self.input)
-
-    def get_trainable_params(self) -> int:
-        return 0
