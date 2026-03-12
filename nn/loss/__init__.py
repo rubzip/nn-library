@@ -12,10 +12,21 @@ class Loss(ABC):
 
 class MSE(Loss):
     def forward(self, y_true: np.ndarray, y_pred: np.ndarray) -> float:
-        return np.mean(np.power(y_true - y_pred, 2))
+        delta = y_true - y_pred
+        return np.mean(delta * delta)
 
     def backward(self, y_true: np.ndarray, y_pred: np.ndarray) -> np.ndarray:
-        return 2 * (y_pred - y_true) / y_true.size
+        delta = y_true - y_pred
+        return 2 * np.mean(delta)
+
+class MAE(Loss):
+    def forward(self, y_true: np.ndarray, y_pred: np.ndarray) -> float:
+        delta = y_true - y_pred
+        return np.mean(np.abs(delta))
+
+    def backward(self, y_true: np.ndarray, y_pred: np.ndarray) -> np.ndarray:
+        delta = y_true - y_pred
+        return np.mean(np.sign(delta))
 
 class CrossEntropy(Loss):
     def forward(self, y_true: np.ndarray, y_pred: np.ndarray) -> float:
