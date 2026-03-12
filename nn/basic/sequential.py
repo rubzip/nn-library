@@ -25,9 +25,11 @@ class Sequential(TrainableLayer):
             layer.clean()
     
     def freeze(self):
+        self._is_trainable = False
         for layer in self.layers:
             layer.freeze()
     
     def unfreeze(self):
+        self._is_trainable = True
         for layer in self.layers:
             layer.unfreeze()
